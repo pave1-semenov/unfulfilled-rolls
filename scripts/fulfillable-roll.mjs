@@ -29,9 +29,9 @@ export async function _rollEvaluate(options) {
         fulfilled.push(results.get(resultId));
       }
       term._fulfilled = fulfilled;
+      console.log(term);
     }
   }
-
   // Standard evaluation path
   return _rollEvaluateOriginal.call(this, options);
 }

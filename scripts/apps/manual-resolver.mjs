@@ -17,7 +17,7 @@ export default class ManualResolver extends FormApplication {
       width: 620,
       submitOnChange: false,
       submitOnClose: true,
-      closeOnSubmit: true
+      closeOnSubmit: false
     });
   }
 

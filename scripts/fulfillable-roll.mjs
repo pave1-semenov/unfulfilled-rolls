@@ -21,6 +21,7 @@ export async function _rollEvaluate(options) {
   const fulfillable = _identifyFulfillableTerms(this.terms, config);
   if ( fulfillable.length ) {
     const results = await _displayFulfillmentDialog(this, fulfillable, config);
+    console.log(results);
     for ( const {term, index} of fulfillable ) {
       const fulfilled = [];
       for ( let i=0; i<term.number; i++ ) {

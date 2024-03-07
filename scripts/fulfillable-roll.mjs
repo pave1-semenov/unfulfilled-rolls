@@ -138,6 +138,13 @@ async function _displayFulfillmentDialog(roll, terms, config) {
     return rolls;
   }, []);
 
+  for (const [id, window] of Object.entries(ui.windows)) {
+    if (window instanceof resolverApp) {
+      await window.submit();
+      await window.close();
+    }
+  }
+
   // Display the resolver app
   return new Promise(resolve => {
     const app = new resolverApp(dice, roll, resolve);

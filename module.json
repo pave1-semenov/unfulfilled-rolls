@@ -1,5 +1,5 @@
 {
-  "id": "unfulfilled-rolls-witcher",
+  "id": "unfulfilled-rolls",
   "title": "Unfulfilled Rolls for Witcher TRPG",
   "description": "Allows Dice rolls in Foundry Virtual Tabletop to be fulfilled by external sources like bluetooth dice or manual input.",
   "version": "#{VERSION}#",

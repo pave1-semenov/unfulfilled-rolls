@@ -159,7 +159,7 @@ async function handleOpenApps(resolverApp) {
     for (const [id, win] of Object.entries(ui.windows)) {
       if (win instanceof resolverApp) {
         win.submit();
-        await win.close();
+        win.close();
         hasClosingApps = true;
         checkWindowIsClosing(win, resolve);
       }

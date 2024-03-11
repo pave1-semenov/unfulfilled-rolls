@@ -145,9 +145,35 @@ async function _displayFulfillmentDialog(roll, terms, config) {
     }
   }
 
+  await handleOpenApps(resolverApp);
   // Display the resolver app
   return new Promise(resolve => {
     const app = new resolverApp(dice, roll, resolve);
     app.render(true);
   });
+}
+
+async function handleOpenApps(resolverApp) {
+  return new Promise((resolve, reject) => {  
+    let hasClosingApps = false;
+    for (const [id, window] of Object.entries(ui.windows)) {
+      if (window instanceof resolverApp) {
+        await window.submit();
+        await window.close();
+        hasClosingApps = true;
+        checkWindowIsClosing(window, resolve);
+      }
+    }
+    if(!hasClosingApps) {
+      resolve();
+    }
+  });
+}
+
+function checkWindowIsClosing(window, callback) {
+  if (window._state === Application.RENDER_STATES.CLOSED) {
+    callback();
+  } else {
+    setTimeout(() => checkWindowIsClosing(window, callback), 100);
+  }
 }

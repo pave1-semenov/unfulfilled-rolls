@@ -138,13 +138,6 @@ async function _displayFulfillmentDialog(roll, terms, config) {
     return rolls;
   }, []);
 
-  for (const [id, window] of Object.entries(ui.windows)) {
-    if (window instanceof resolverApp) {
-      await window.submit();
-      await window.close();
-    }
-  }
-
   await handleOpenApps(resolverApp);
   // Display the resolver app
   return new Promise(resolve => {
@@ -158,8 +151,6 @@ async function handleOpenApps(resolverApp) {
     let hasClosingApps = false;
     for (const [id, win] of Object.entries(ui.windows)) {
       if (win instanceof resolverApp) {
-        win.submit();
-        win.close();
         hasClosingApps = true;
         checkWindowIsClosing(win, resolve);
       }

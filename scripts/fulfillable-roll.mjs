@@ -156,12 +156,12 @@ async function _displayFulfillmentDialog(roll, terms, config) {
 async function handleOpenApps(resolverApp) {
   return new Promise((resolve, reject) => {  
     let hasClosingApps = false;
-    for (const [id, window] of Object.entries(ui.windows)) {
-      if (window instanceof resolverApp) {
-        await window.submit();
-        await window.close();
+    for (const [id, win] of Object.entries(ui.windows)) {
+      if (win instanceof resolverApp) {
+        win.submit();
+        await win.close();
         hasClosingApps = true;
-        checkWindowIsClosing(window, resolve);
+        checkWindowIsClosing(win, resolve);
       }
     }
     if(!hasClosingApps) {
@@ -170,10 +170,10 @@ async function handleOpenApps(resolverApp) {
   });
 }
 
-function checkWindowIsClosing(window, callback) {
-  if (window._state === Application.RENDER_STATES.CLOSED) {
+function checkWindowIsClosing(win, callback) {
+  if (win._state === Application.RENDER_STATES.CLOSED) {
     callback();
   } else {
-    setTimeout(() => checkWindowIsClosing(window, callback), 100);
+    setTimeout(() => checkWindowIsClosing(win, callback), 100);
   }
 }
